@@ -15,9 +15,9 @@ public extension Emoji {
      make it possible to inject it with the standard builder
      in the system keyboard initializer.
      */
-    struct KeyboardWrapper: View {
+    public struct KeyboardWrapper: View {
         
-        init(
+        public init(
             actionHandler: KeyboardActionHandler,
             keyboardContext: KeyboardContext,
             calloutContext: CalloutContext?,
