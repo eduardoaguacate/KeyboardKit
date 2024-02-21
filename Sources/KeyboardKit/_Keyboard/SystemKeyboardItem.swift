@@ -26,7 +26,7 @@ public struct SystemKeyboardItem<Content: View>: View {
        - inputWidth: The input width within the keyboard.
        - content: The content view to use within the item.
      */
-    init(
+    public init(
         item: KeyboardLayout.Item,
         actionHandler: KeyboardActionHandler,
         styleProvider: KeyboardStyleProvider,
