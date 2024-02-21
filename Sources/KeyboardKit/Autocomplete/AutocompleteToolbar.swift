@@ -62,7 +62,7 @@ public struct AutocompleteToolbar<ItemView: View, SeparatorView: View>: View {
     public typealias SuggestionAction = (Suggestion) -> Void
     
     /// This view builder is used to build toolbar items.
-    public typealias ItemViewBuilder = (Suggestion, Style, Locale) -> ItemView
+    public typealias ItemViewBuilder = (Suggestion, Style, Locale, Bool) -> ItemView
     
     /// This view builder is used to build item separators.
     public typealias SeparatorViewBuilder = (Suggestion, Style) -> SeparatorView
@@ -79,7 +79,6 @@ public struct AutocompleteToolbar<ItemView: View, SeparatorView: View>: View {
     }
     
     public var body: some View {
-        ScrollView(.horizontal) {
             HStack {
                 ForEach(items) { item in
                     itemButton(for: item.suggestion)
@@ -88,7 +87,6 @@ public struct AutocompleteToolbar<ItemView: View, SeparatorView: View>: View {
                     }
                 }
             }.frame(height: style.height)
-        }
     }
 }
 
@@ -125,12 +123,14 @@ public extension AutocompleteToolbar where ItemView == Item {
     static func standardItemView(
         suggestion: Suggestion,
         style: Style,
-        locale: Locale
+        locale: Locale,
+        isMultiline: Bool = false
     ) -> Autocomplete.ToolbarItem {
         .init(
             suggestion: suggestion,
             locale: locale,
-            style: style.item
+            style: style.item,
+            isMultiline: isMultiline
         )
     }
 }
@@ -201,18 +201,35 @@ public extension AutocompleteToolbar where ItemView == Item, SeparatorView == Se
     }
 }
 
-private extension AutocompleteToolbar {
-    
+public extension AutocompleteToolbar {
     func itemButton(for suggestion: Suggestion) -> some View {
         Button(action: { suggestionAction(suggestion) }, label: {
-            itemView(suggestion, style, locale)
+            itemView(suggestion, style, locale, false)
                 .padding(.horizontal, 4)
                 .padding(.vertical, 10)
                 .background(suggestion.isAutocorrect ? style.autocorrectBackground.color : Color.clearInteractable)
                 .cornerRadius(style.autocorrectBackground.cornerRadius)
         }).buttonStyle(.plain)
     }
+    
 }
+
+public extension AutocompleteToolbar where ItemView == Item, SeparatorView == Separator {
+    public static func itemButton(locale: Locale = .current, style: Style, for suggestions: [Suggestion], suggestionAction: @escaping SuggestionAction) -> some View {
+            VStack {
+                ForEach(suggestions) { suggestion in
+                    Button(action: { suggestionAction(suggestion) }, label: {
+                        Self.standardItemView(suggestion: suggestion, style: style, locale: locale, isMultiline: true)
+                            .padding(.horizontal, 4)
+                            .padding(.vertical, 10)
+                            .background(suggestion.isAutocorrect ? style.autocorrectBackground.color : Color.clearInteractable)
+                            .cornerRadius(style.autocorrectBackground.cornerRadius)
+                    }).buttonStyle(.plain).frame(height: style.height)
+                }
+            }
+    }
+}
+
 
 private extension AutocompleteToolbar {
     
@@ -272,7 +289,7 @@ struct Autocomplete_Toolbar_Previews: PreviewProvider {
         .padding()
     }
     
-    static func previewItem(for suggestion: Autocomplete.Suggestion, style: KeyboardStyle.AutocompleteToolbar, locale: Locale) -> some View {
+    static func previewItem(for suggestion: Autocomplete.Suggestion, style: KeyboardStyle.AutocompleteToolbar, locale: Locale, isMultiline: Bool = false) -> some View {
         HStack {
             Spacer()
             VStack(spacing: 4) {
