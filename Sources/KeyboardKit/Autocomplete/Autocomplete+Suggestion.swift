@@ -22,7 +22,9 @@ public extension Autocomplete {
      suggestion is unknown. Unknown suggestions usually have
      the text wrapped in locale-specific quotation marks.
      */
-    struct Suggestion {
+    struct Suggestion : Identifiable {
+        public var id: String { text }
+        
         
         /**
          Create an autocomplete suggestion.

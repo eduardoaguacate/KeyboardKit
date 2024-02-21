@@ -29,16 +29,19 @@ public extension Autocomplete {
         public init(
             suggestion: Autocomplete.Suggestion,
             locale: Locale = .current,
-            style: KeyboardStyle.AutocompleteToolbarItem = .standard
+            style: KeyboardStyle.AutocompleteToolbarItem = .standard,
+            isMultiline: Bool = false
         ) {
             self.suggestion = suggestion
             self.locale = locale
             self.style = style
+            self.isMultiline = isMultiline
         }
         
         private let suggestion: Suggestion
         private let locale: Locale
         private let style: KeyboardStyle.AutocompleteToolbarItem
+        private let isMultiline: Bool
         
         public var body: some View {
             VStack(spacing: 0) {
@@ -55,14 +58,16 @@ private extension Autocomplete.ToolbarItem {
         Autocomplete.ToolbarItemTitle(
             suggestion: suggestion,
             locale: locale,
-            style: style
+            style: style,
+            isMultiline: self.isMultiline
         )
     }
     
     var subtitle: some View {
         Autocomplete.ToolbarItemSubtitle(
             suggestion: suggestion,
-            style: style
+            style: style,
+            isMultiline: self.isMultiline
         )
     }
 }

@@ -27,21 +27,31 @@ public extension Autocomplete {
          */
         public init(
             suggestion: Autocomplete.Suggestion,
-            style: KeyboardStyle.AutocompleteToolbarItem = .standard
+            style: KeyboardStyle.AutocompleteToolbarItem = .standard,
+            isMultiline: Bool = false
         ) {
             self.suggestion = suggestion
             self.style = style
+            self.isMultiline = isMultiline
         }
         
         private let suggestion: Autocomplete.Suggestion
         private let style: KeyboardStyle.AutocompleteToolbarItem
+        private let isMultiline: Bool
         
         public var body: some View {
             if let subtitle = suggestion.subtitle {
-                Text(subtitle)
-                    .lineLimit(1)
-                    .font(style.subtitleFont.font)
-                    .foregroundColor(style.subtitleColor)
+                if isMultiline {
+                    Text(subtitle)
+                        .fixedSize(horizontal: false, vertical: true)
+                        .font(style.subtitleFont.font)
+                        .foregroundColor(style.subtitleColor)
+                } else {
+                    Text(subtitle)
+                        .lineLimit(1)
+                        .font(style.subtitleFont.font)
+                        .foregroundColor(style.subtitleColor)
+                }
             }
         }
     }

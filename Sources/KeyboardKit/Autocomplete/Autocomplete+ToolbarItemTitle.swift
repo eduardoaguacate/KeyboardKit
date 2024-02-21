@@ -29,23 +29,34 @@ public extension Autocomplete {
         public init(
             suggestion: Autocomplete.Suggestion,
             locale: Locale = .current,
-            style: KeyboardStyle.AutocompleteToolbarItem = .standard
+            style: KeyboardStyle.AutocompleteToolbarItem = .standard,
+            isMultiline: Bool = false
         ) {
             self.suggestion = suggestion
             self.style = style
             self.locale = locale
+            self.isMultiline = isMultiline
         }
         
         private let suggestion: Autocomplete.Suggestion
         private let locale: Locale
         private let style: KeyboardStyle.AutocompleteToolbarItem
+        private let isMultiline: Bool
         
         public var body: some View {
-            Text(displayTitle)
-                .lineLimit(1)
-                .font(style.titleFont.font)
-                .foregroundColor(style.titleColor)
-                .frame(maxWidth: .infinity)
+            if isMultiline {
+                Text(displayTitle)
+                    .fixedSize(horizontal: false, vertical: true)
+                    .font(style.titleFont.font)
+                    .foregroundColor(style.titleColor)
+            } else {
+                Text(displayTitle)
+                    .lineLimit(1)
+                    .font(style.titleFont.font)
+                    .foregroundColor(style.titleColor)
+                    .frame(maxWidth: .infinity)
+            }
+            
         }
     }
 }
