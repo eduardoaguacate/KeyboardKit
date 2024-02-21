@@ -28,7 +28,7 @@ public extension KeyboardAction {
      The action that by default should be triggered when the
      action is triggered without a certain gesture.
      */
-    var standardAction: GestureAction? {
+    public var standardAction: GestureAction? {
         standardReleaseAction ?? standardPressAction
     }
     
@@ -36,7 +36,7 @@ public extension KeyboardAction {
      The action that by default should be triggered when the
      action is triggered with a certain gesture.
      */
-    func standardAction(for gesture: Gestures.KeyboardGesture) -> GestureAction? {
+    public func standardAction(for gesture: Gestures.KeyboardGesture) -> GestureAction? {
         switch gesture {
         case .doubleTap: return standardDoubleTapAction
         case .longPress: return standardLongPressAction
@@ -50,13 +50,13 @@ public extension KeyboardAction {
      The action that by default should be triggered when the
      action is double tapped.
      */
-    var standardDoubleTapAction: GestureAction? { nil }
+    public var standardDoubleTapAction: GestureAction? { nil }
     
     /**
      The action that by default should be triggered when the
      action is long pressed.
      */
-    var standardLongPressAction: GestureAction? {
+    public var standardLongPressAction: GestureAction? {
         switch self {
         case .space: return { _ in }
         default: return nil
@@ -67,7 +67,7 @@ public extension KeyboardAction {
      The action that by default should be triggered when the
      action is pressed.
      */
-    var standardPressAction: GestureAction? {
+    public var standardPressAction: GestureAction? {
         switch self {
         case .backspace: return { $0?.deleteBackward() }
         case .keyboardType(let type): return { $0?.setKeyboardType(type) }
@@ -79,7 +79,7 @@ public extension KeyboardAction {
      The action that by default should be triggered when the
      action is released.
      */
-    var standardReleaseAction: GestureAction? {
+    public var standardReleaseAction: GestureAction? {
         switch self {
         case .character(let char): return { $0?.insertText(char) }
         case .characterMargin(let char): return { $0?.insertText(char) }
@@ -108,7 +108,7 @@ public extension KeyboardAction {
      The action that by default should be triggered when the
      action is pressed, and repeated until it is released.
      */
-    var standardRepeatAction: GestureAction? {
+    public var standardRepeatAction: GestureAction? {
         switch self {
         case .backspace: return standardPressAction
         default: return nil
