@@ -8,6 +8,12 @@
 
 import Combine
 
+public enum RemoteSuggestionQuery {
+    case incorrect
+    case correct
+    case none
+}
+
 /**
  This observable class can be used to handle an autocomplete
  specific state, including configurations and suggestions.
@@ -49,10 +55,15 @@ public class AutocompleteContext: ObservableObject {
     @Published
     public var suggestions: [Autocomplete.Suggestion] = []
 
+    /// The possible states for a given autocomplete remote query
+    @Published
+    public var remoteQueryState: RemoteSuggestionQuery = .none
+    
     /// Reset the autocomplete contexts.
     public func reset() {
         isLoading = false
         lastError = nil
         suggestions = []
+        remoteQueryState = .none
     }
 }

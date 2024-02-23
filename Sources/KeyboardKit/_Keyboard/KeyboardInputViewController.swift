@@ -330,9 +330,10 @@ public extension KeyboardInputViewController {
     }
     
     /// Update the autocomplete context with new suggestions.
-    func updateAutocompleteContext(with result: [Autocomplete.Suggestion]) {
+    func updateAutocompleteContext(with result: [Autocomplete.Suggestion], remoteQueryState: RemoteSuggestionQuery = .none) {
         DispatchQueue.main.async { [weak self] in
             self?.state.autocompleteContext.suggestions = result
+            self?.state.autocompleteContext.remoteQueryState = remoteQueryState
         }
     }
     

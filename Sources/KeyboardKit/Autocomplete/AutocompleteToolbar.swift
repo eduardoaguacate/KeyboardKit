@@ -216,15 +216,15 @@ public extension AutocompleteToolbar {
 
 public extension AutocompleteToolbar where ItemView == Item, SeparatorView == Separator {
     public static func itemButton(locale: Locale = .current, style: Style, for suggestions: [Suggestion], suggestionAction: @escaping SuggestionAction) -> some View {
-            VStack {
-                ForEach(suggestions) { suggestion in
+            ForEach(suggestions) { suggestion in
+                VStack {
                     Button(action: { suggestionAction(suggestion) }, label: {
                         Self.standardItemView(suggestion: suggestion, style: style, locale: locale, isMultiline: true)
-                            .padding(.horizontal, 4)
-                            .padding(.vertical, 10)
+                            .padding(.vertical, 20)
                             .background(suggestion.isAutocorrect ? style.autocorrectBackground.color : Color.clearInteractable)
                             .cornerRadius(style.autocorrectBackground.cornerRadius)
-                    }).buttonStyle(.plain).frame(height: style.height)
+                    }).buttonStyle(.plain)
+                    Spacer()
                 }
             }
     }
