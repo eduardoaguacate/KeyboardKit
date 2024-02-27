@@ -22,7 +22,11 @@ public extension Autocomplete {
      suggestion is unknown. Unknown suggestions usually have
      the text wrapped in locale-specific quotation marks.
      */
-    struct Suggestion : Identifiable {
+    struct Suggestion : Identifiable, Equatable {
+        public static func == (lhs: Autocomplete.Suggestion, rhs: Autocomplete.Suggestion) -> Bool {
+            return lhs.text == rhs.text && lhs.subtitle == rhs.subtitle && lhs.title == rhs.title
+        }
+        
         public var id: String { text }
         
         
