@@ -116,7 +116,7 @@ struct KeyboardButton_SpaceContent_Previews: PreviewProvider {
     
     static var spaceView: some View {
         KeyboardButton.SpaceContent(
-            localeText: KeyboardLocale.spanish.locale.localizedName,
+            localeText: KeyboardLocale.spanish_spain.locale.localizedName,
             spaceView: Image.keyboardGlobe)
     }
     

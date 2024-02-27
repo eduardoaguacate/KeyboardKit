@@ -85,7 +85,7 @@ public enum KeyboardLocale: String,
     case serbian_latin = "sr-Latn"
     case slovak = "sk"
     case slovenian = "sl"
-    case spanish = "es"
+    case spanish_spain = "es_ES"
     case swedish = "sv"
     case swahili = "sw"
     case turkish = "tr"
@@ -174,7 +174,7 @@ public extension KeyboardLocale {
         case .serbian_latin: return "serbian_latin"
         case .slovenian: return "slovenian"
         case .slovak: return "slovak"
-        case .spanish: return "spanish"
+        case .spanish_spain: return "spanish_spain"
         case .swedish: return "swedish"
         case .swahili: return "swahili"
             

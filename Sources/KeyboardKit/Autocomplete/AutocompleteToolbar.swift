@@ -266,17 +266,17 @@ struct Autocomplete_Toolbar_Previews: PreviewProvider {
                 suggestionAction: { _ in }).previewBar()
             AutocompleteToolbar(
                 suggestions: previewSuggestions + additional,
-                locale: KeyboardLocale.spanish.locale,
+                locale: KeyboardLocale.spanish_spain.locale,
                 style: .standard,
                 suggestionAction: { _ in }).previewBar()
             AutocompleteToolbar(
                 suggestions: previewSuggestions + additional,
-                locale: KeyboardLocale.spanish.locale,
+                locale: KeyboardLocale.spanish_spain.locale,
                 style: .preview1,
                 suggestionAction: { _ in }).previewBar()
             AutocompleteToolbar(
                 suggestions: previewSuggestions + additional,
-                locale: KeyboardLocale.spanish.locale,
+                locale: KeyboardLocale.spanish_spain.locale,
                 style: .preview2,
                 suggestionAction: { _ in }).previewBar()
             AutocompleteToolbar(
