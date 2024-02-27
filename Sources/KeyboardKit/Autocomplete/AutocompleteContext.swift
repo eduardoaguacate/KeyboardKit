@@ -11,6 +11,7 @@ import Combine
 public enum RemoteSuggestionQuery {
     case incorrect
     case correct
+    case loading /* i.e. the query hasn't been resolved and it's waiting on some I/O (either network or disk) */
     case none
 }
 
