@@ -22,13 +22,12 @@ public extension Autocomplete {
      suggestion is unknown. Unknown suggestions usually have
      the text wrapped in locale-specific quotation marks.
      */
-    struct Suggestion : Identifiable, Equatable {
+    public struct Suggestion : Identifiable, Equatable {
         public static func == (lhs: Autocomplete.Suggestion, rhs: Autocomplete.Suggestion) -> Bool {
             return lhs.text == rhs.text && lhs.subtitle == rhs.subtitle && lhs.title == rhs.title
         }
         
-        public var id: String { text }
-        
+        public let id: UUID
         
         /**
          Create an autocomplete suggestion.
@@ -42,6 +41,7 @@ public extension Autocomplete {
            - additionalInfo: An optional dictionary that can contain additional info, by default `empty`.
          */
         public init(
+            id: UUID = UUID(),
             text: String,
             title: String? = nil,
             isAutocorrect: Bool = false,
@@ -57,6 +57,7 @@ public extension Autocomplete {
             self.subtitle = subtitle
             self.isSentence = isSentence
             self.additionalInfo = additionalInfo
+            self.id = id
         }
         
         /// The text that should be sent to the proxy.
